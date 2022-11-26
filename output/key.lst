@@ -1,0 +1,255 @@
+C51 COMPILER V9.01   KEY                                                                   11/25/2022 22:50:27 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\output\key.obj
+COMPILER INVOKED BY: C:\Keil_v5-79\C51\BIN\C51.EXE driver\key.c COMPACT BROWSE INCDIR(.\driver) DEBUG OBJECTEXTEND CODE 
+                    -SYMBOLS PRINT(.\output\key.lst) PREPRINT(.\output\key.i) OBJECT(.\output\key.obj)
+
+line level    source
+
+   1          //key.c
+   2          #include <reg52.h>
+   3          #include "com.h"
+   4          #include "key.h"
+   5                   
+   6          uchar getRow()
+   7          {
+   8   1        uchar ret = 0;
+   9   1        KEY_PORT=0xf0;
+  10   1      
+  11   1        switch(KEY_PORT){
+  12   2              case  0x70: ret = 1;break;
+  13   2              case  0xB0: ret = 2;break;
+  14   2              case  0xD0: ret = 3;break;
+  15   2              case  0xE0: ret = 4;break; 
+  16   2        }       
+  17   1        
+  18   1        return ret;
+  19   1      
+  20   1      }
+  21          
+  22          uchar getCol()
+  23          {
+  24   1        uchar ret = 0;  
+  25   1        KEY_PORT= 0x0F;
+  26   1        //tmp = P1;
+  27   1        switch(KEY_PORT){
+  28   2              case  0x07: ret = 1;break;
+  29   2              case  0x0B: ret = 2;break;
+  30   2              case  0x0D: ret = 3;break;
+  31   2              case  0x0E: ret = 4;break;
+  32   2        }
+  33   1      //  if(P3^3 == 0)  ret= 1;//1
+  34   1      //  if(P3^2 == 0)  ret= 2;//2
+  35   1      //  if(P3^1 == 0)  ret= 3;//3
+  36   1      //  if(P3^0 == 0)  ret= 4;//4
+  37   1        
+  38   1        return ret;
+  39   1      
+  40   1      }
+  41          
+  42          uchar getKey()
+  43          {       uchar key =0xFF;
+  44   1              uchar row,col;
+  45   1              row = getRow();  //获取行号
+  46   1              if(row != 0) {   //有键按下
+  47   2                      delay(200);      //ysanshi 
+  48   2                      col = getCol();// 获取列号
+  49   2                      if(col!=0){
+  50   3                         key =(row-1)*4+(col-1);      //按键编码         
+  51   3                         //while(getCol()){;} // 等待放手
+  52   3                      }
+  53   2                      while(getCol()){;}
+  54   2              }
+C51 COMPILER V9.01   KEY                                                                   11/25/2022 22:50:27 PAGE 2   
+
+  55   1              return key;
+  56   1      }
+  57          
+C51 COMPILER V9.01   KEY                                                                   11/25/2022 22:50:27 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION getRow (BEGIN)
+                                           ; SOURCE LINE # 6
+                                           ; SOURCE LINE # 7
+                                           ; SOURCE LINE # 8
+;---- Variable 'ret' assigned to Register 'R7' ----
+0000 E4                CLR     A
+0001 FF                MOV     R7,A
+                                           ; SOURCE LINE # 9
+0002 75A0F0            MOV     P2,#0F0H
+                                           ; SOURCE LINE # 11
+0005 AEA0              MOV     R6,P2
+0007 EE                MOV     A,R6
+0008 2450              ADD     A,#050H
+000A 6010              JZ      ?C0003
+000C 24E0              ADD     A,#0E0H
+000E 6010              JZ      ?C0004
+0010 24F0              ADD     A,#0F0H
+0012 6010              JZ      ?C0005
+0014 2470              ADD     A,#070H
+0016 700E              JNZ     ?C0001
+                                           ; SOURCE LINE # 12
+0018         ?C0002:
+0018 7F01              MOV     R7,#01H
+001A 800A              SJMP    ?C0001
+                                           ; SOURCE LINE # 13
+001C         ?C0003:
+001C 7F02              MOV     R7,#02H
+001E 8006              SJMP    ?C0001
+                                           ; SOURCE LINE # 14
+0020         ?C0004:
+0020 7F03              MOV     R7,#03H
+0022 8002              SJMP    ?C0001
+                                           ; SOURCE LINE # 15
+0024         ?C0005:
+0024 7F04              MOV     R7,#04H
+                                           ; SOURCE LINE # 16
+0026         ?C0001:
+                                           ; SOURCE LINE # 18
+                                           ; SOURCE LINE # 20
+0026         ?C0006:
+0026 22                RET     
+             ; FUNCTION getRow (END)
+
+             ; FUNCTION getCol (BEGIN)
+                                           ; SOURCE LINE # 22
+                                           ; SOURCE LINE # 23
+                                           ; SOURCE LINE # 24
+;---- Variable 'ret' assigned to Register 'R7' ----
+0000 E4                CLR     A
+0001 FF                MOV     R7,A
+                                           ; SOURCE LINE # 25
+0002 75A00F            MOV     P2,#0FH
+                                           ; SOURCE LINE # 27
+0005 AEA0              MOV     R6,P2
+0007 EE                MOV     A,R6
+0008 24F5              ADD     A,#0F5H
+000A 600F              JZ      ?C0009
+000C 24FE              ADD     A,#0FEH
+000E 600F              JZ      ?C0010
+C51 COMPILER V9.01   KEY                                                                   11/25/2022 22:50:27 PAGE 4   
+
+0010 14                DEC     A
+0011 6010              JZ      ?C0011
+0013 2407              ADD     A,#07H
+0015 700E              JNZ     ?C0007
+                                           ; SOURCE LINE # 28
+0017         ?C0008:
+0017 7F01              MOV     R7,#01H
+0019 800A              SJMP    ?C0007
+                                           ; SOURCE LINE # 29
+001B         ?C0009:
+001B 7F02              MOV     R7,#02H
+001D 8006              SJMP    ?C0007
+                                           ; SOURCE LINE # 30
+001F         ?C0010:
+001F 7F03              MOV     R7,#03H
+0021 8002              SJMP    ?C0007
+                                           ; SOURCE LINE # 31
+0023         ?C0011:
+0023 7F04              MOV     R7,#04H
+                                           ; SOURCE LINE # 32
+0025         ?C0007:
+                                           ; SOURCE LINE # 38
+                                           ; SOURCE LINE # 40
+0025         ?C0012:
+0025 22                RET     
+             ; FUNCTION getCol (END)
+
+             ; FUNCTION getKey (BEGIN)
+                                           ; SOURCE LINE # 42
+                                           ; SOURCE LINE # 43
+0000 7800        R     MOV     R0,#LOW key
+0002 74FF              MOV     A,#0FFH
+0004 F2                MOVX    @R0,A
+                                           ; SOURCE LINE # 45
+0005 120000      R     LCALL   getRow
+0008 08                INC     R0
+0009 EF                MOV     A,R7
+000A F2                MOVX    @R0,A
+                                           ; SOURCE LINE # 46
+000B 6021              JZ      ?C0013
+                                           ; SOURCE LINE # 47
+000D 7FC8              MOV     R7,#0C8H
+000F 7E00              MOV     R6,#00H
+0011 120000      E     LCALL   _delay
+                                           ; SOURCE LINE # 48
+0014 120000      R     LCALL   getCol
+;---- Variable 'col' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 49
+0017 EF                MOV     A,R7
+0018 600E              JZ      ?C0015
+                                           ; SOURCE LINE # 50
+001A 7800        R     MOV     R0,#LOW row
+001C E2                MOVX    A,@R0
+001D 14                DEC     A
+001E 25E0              ADD     A,ACC
+0020 25E0              ADD     A,ACC
+0022 FE                MOV     R6,A
+0023 EF                MOV     A,R7
+0024 14                DEC     A
+0025 2E                ADD     A,R6
+0026 18                DEC     R0
+0027 F2                MOVX    @R0,A
+C51 COMPILER V9.01   KEY                                                                   11/25/2022 22:50:27 PAGE 5   
+
+                                           ; SOURCE LINE # 52
+0028         ?C0015:
+                                           ; SOURCE LINE # 53
+0028 120000      R     LCALL   getCol
+002B EF                MOV     A,R7
+002C 70FA              JNZ     ?C0015
+002E         ?C0016:
+                                           ; SOURCE LINE # 54
+002E         ?C0013:
+                                           ; SOURCE LINE # 55
+002E 7800        R     MOV     R0,#LOW key
+0030 E2                MOVX    A,@R0
+0031 FF                MOV     R7,A
+                                           ; SOURCE LINE # 56
+0032         ?C0017:
+0032 22                RET     
+             ; FUNCTION getKey (END)
+
+C51 COMPILER V9.01   KEY                                                                   11/25/2022 22:50:27 PAGE 6   
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+P1 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0090H  1
+P2 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A0H  1
+P3 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B0H  1
+IE . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A8H  1
+_delay . . . . . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+IP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B8H  1
+SCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
+TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
+getCol . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  ret. . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+T2CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C8H  1
+getKey . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  key. . . . . . . . . . . . . . . . .  AUTO     PDATA  U_CHAR   0000H  1
+  row. . . . . . . . . . . . . . . . .  AUTO     PDATA  U_CHAR   0001H  1
+  col. . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+PSW. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D0H  1
+getRow . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  ret. . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    128    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----       2
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

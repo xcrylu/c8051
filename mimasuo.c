@@ -36,7 +36,7 @@ void main()
 //
 //   I2C_Stop();
 //   C02WriteByte(0x11,0x55);
-//   delay(300);	//µÈ´ýÐ´Íê³É
+//   delay(300);	//ï¿½È´ï¿½Ð´ï¿½ï¿½ï¿½
 //   C02ReadByte(0x00);
 //   C02ReadByte(0x01);
 //   C02ReadByte(0x02);

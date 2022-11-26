@@ -121,6 +121,7 @@ unsigned short ds18B20ReadTemperture(void)
 	ret = tmp1+tmp2*255;
 	return ret;
 }
+
 		
 	
 

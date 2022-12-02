@@ -1,0 +1,61 @@
+{
+    "configurations": [
+        {
+            "name": "Target 1",
+            "includePath": [
+                "c:\\Users\\xie_c\\Desktop\\密码锁\\driver",
+                "c:\\Users\\xie_c\\Desktop\\密码锁\\Keil_v5\\C51\\INC",
+                "c:\\Users\\xie_c\\Desktop\\密码锁"
+            ],
+            "defines": [
+                "__C51__",
+                "__VSCODE_C51__",
+                "reentrant=",
+                "compact=",
+                "small=",
+                "large=",
+                "data=",
+                "idata=",
+                "pdata=",
+                "bdata=",
+                "xdata=",
+                "code=",
+                "bit=char",
+                "sbit=char",
+                "sfr=char",
+                "sfr16=int",
+                "sfr32=int",
+                "interrupt=",
+                "using=",
+                "_at_=",
+                "_priority_=",
+                "_task_="
+            ],
+            "intelliSenseMode": "${default}"
+        },
+        {
+            "name": "includepath",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/driver/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}

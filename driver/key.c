@@ -2,6 +2,8 @@
 #include <reg52.h>
 #include "com.h"
 #include "key.h"
+
+char keyEnCode(uchar key);
 	 
 uchar getRow()
 {
@@ -39,19 +41,30 @@ uchar getCol()
 
 }
 
-uchar getKey()
+char getKey()
 {	uchar key =0xFF;
 	uchar row,col;
-	row = getRow();	 //»ñÈ¡ÐÐºÅ
-	if(row != 0) {   //ÓÐ¼ü°´ÏÂ
-		delay(200);	 //ysanshi 
-	  	col = getCol();// »ñÈ¡ÁÐºÅ
+	row = getRow();	 //è¯»è¡Œ
+	if(row != 0) {   //æœ‰é”®æŒ‰ä¸‹
+		delay(200);	 //å»¶æ—¶ï¼Œæ¶ˆæŠ–
+	  	col = getCol();// è¯»åˆ—
 		if(col!=0){
-		   key =(row-1)*4+(col-1);	//°´¼ü±àÂë	   
-		   //while(getCol()){;} // µÈ´ý·ÅÊÖ
+		   key =(row-1)*4+(col-1);	//è®¡æ•°é”®å€¼	   
+		   //while(getCol()){;} // 
 		}
-		while(getCol()){;}
+		while(getCol()){;} //ç­‰å¾…æŒ‰é”®å¼¹èµ·
 	}
-	return key;
+	return keyEnCode(key);
+}
+
+char keyEnCode(uchar key)
+{
+	char ret = key;
+	if(key<10) {
+		ret = key+'0';
+	}else if (key<16){
+		ret = key-10 + 'A';
+	}
+	return ret;
 }
 

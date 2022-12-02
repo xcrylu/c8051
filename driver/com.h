@@ -7,15 +7,18 @@
 
 #define uint unsigned int
 #define uchar unsigned char
+#define OK 			1
+#define FAILURE 	0
 
-#define fosc  12000000	          //¾§ÕñÆµÂÊ µ¥Î» hz
-#define Tosc  1*1000000/fosc	  //Ê±ÖÓÖÜÆÚ µ¥Î» Î¢Ãë
-#define Tm  Tosc*12				  //»úÆ÷ÖÜÆÚ µ¥Î» Î¢Ãî
+#define fosc  12000000	          //æ™¶æŒ¯é¢‘ç‡ å•ä½ hz
+#define Tosc  1*1000000/fosc	  //æ—¶é’Ÿå‘¨æœŸ å•ä½ å¾®ç§’
+#define Tm  (Tosc*12)				  //æœºå™¨å‘¨æœŸ å•ä½ å¾®å¦™
 
-#define msCount  1000/Tm          //1ms¼ÆÊıÖµ
+#define msCount  1000  ///Tm          //1msè®¡æ•°å€¼
+
 
 void delay(uint  i) ;	
-void delayus(uint i );
+void delayus(uchar i );
 void delayms(uint i); 
 
 #endif

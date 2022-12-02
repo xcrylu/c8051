@@ -4,17 +4,17 @@
 #ifndef _DS18B20_H
 #define _DS8B20_H  
 
-sbit DQ = P1^4;
+sbit DQ = P3^4;
 
 //enum ds1b20Cmd{
-// ÎÂ¶È×ªÃüÁîúû
-#define	DS1B20Cmd_CONVERT   0x44   	//¶ÁÈ«²¿Ôİ´æÆ÷£¬°üÀ¨crc×Ö½Ú
-//Ôİ´æÆ÷ÃüÁîúû
-#define	DS1B20Cmd_READ_SCHPAD 	 0xBE		//Ğ´ÄÚ²¿Ôİ´æÆ÷×Ö½Ú2£¬3£¬4
-#define	DS1B20Cmd_WRITE_SCHPAD 	 0x4E		//¸´ÖÆÔİ´æÆ÷ÄÚÈİµ½EEPROM
-#define	DS1B20Cmd_COPY_SCHPAD 	 0xB8		//´ÓEEPROM½«TH£¬ºÍTL¸´ÖÆµ½Ôİ´æÆ÷
-#define	DS1B20Cmd_READ_PWR_SPY	 0xB4		//¶ÁµçÔ´¹©µçÄ£Ê½
-// ROM ÃüÁîúû
+// æ¸©åº¦è½¬æ¢å‘½ä»¤
+#define	DS1B20Cmd_CONVERT   0x44   	//
+//æš‚å­˜å™¨å‘½ä»¤
+#define	DS1B20Cmd_READ_SCHPAD 	 0xBE		//è¯»æš‚å­˜å™¨
+#define	DS1B20Cmd_WRITE_SCHPAD 	 0x4E		//å†™æš‚å­˜å™¨
+#define	DS1B20Cmd_COPY_SCHPAD 	 0xB8		//å°†æš‚å­˜å™¨å†…å®¹å¤åˆ¶åˆ°ROM
+#define	DS1B20Cmd_READ_PWR_SPY	 0xB4		//è¯»ä¾›ç”µçŠ¶æ€
+// ROM å‘½ä»¤
 #define	DS1B20Cmd_SEARCH_ROM	 0xF0
 #define	DS1B20Cmd_READ_ROM		 0x33
 #define	DS1B20Cmd_MATH_ROM		 0x55
@@ -22,13 +22,13 @@ sbit DQ = P1^4;
 #define	DS1B20Cmd_ALARM_SEARCH	 0xEC	
 //}
 
-//DS18B20¹¤×÷Ä£Ê½
-#define DS1B20Cmd_MODE_9BIT    	0x1F	  //9bit ×î´óÎÂ¶È×ª»»Ê±¼ä£º93.75 ms
-#define DS1B20Cmd_MODE_10BIT	0x3F	  //10bit ×î´óÎÂ¶È×ª»»Ê±¼ä£º187.5 ms
-#define DS1B20Cmd_MODE_11BIT	0x5F	  //9bit ×î´óÎÂ¶È×ª»»Ê±¼ä£º275 ms
-#define DS1B20Cmd_MODE_12BIT	0x7F	  //9bit ×î´óÎÂ¶È×ª»»Ê±¼ä£º7500 ms
+//DS18B20æµ‹æ¸©æ¨¡å¼
+#define DS1B20CONF_MODE_9BIT    	0x1F	  //9bit è½¬æ¢æ—¶é—´ï¼š93.75 ms
+#define DS1B20CONF_MODE_10BIT	0x3F	  //10bit è½¬æ¢æ—¶é—´ï¼š187.5 ms
+#define DS1B20CONF_MODE_11BIT	0x5F	  //9bit è½¬æ¢æ—¶é—´ï¼š275 ms
+#define DS1B20CONF_MODE_12BIT	0x7F	  //9bit è½¬æ¢æ—¶é—´ï¼š7500 ms
 
-//ds18b20  64bitÉè±¸id £¬ÕâÀï¶¨ÒåÁË3¸öÉè±¸id
+//ds18b20  64bitè®¾å¤‡ID
 //extern  uchar devId[3][8]; 
 // uchar devId[3][8]={
 //		{0},
@@ -45,8 +45,10 @@ sbit DQ = P1^4;
  uchar 	wire1ReadBit(void);
  void 	wire1WriteByte(uchar);
  uchar 	wire1ReadByte(void);
+ void ds18b20ReadId(uchar buff[8]);
  //unsigned short ds18b20ReadTemperature(uchar devId[8]);
-  unsigned short ds18b20ReadTemperature(void);
+  unsigned short ds18B20ReadTemperture(void);
+  float temperatureProcess(uint t,char buff[8]);
 
 
 #endif

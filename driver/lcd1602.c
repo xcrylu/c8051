@@ -72,3 +72,8 @@ void lcd1602WriteChar(unsigned char row,
 	wc51ddr(ch);
 
 }
+
+void lcd1602Clean(void)
+{
+	wc51r(0x01);     	//清屏
+}

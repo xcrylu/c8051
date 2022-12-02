@@ -1,13 +1,12 @@
 //com.c
 #include "com.h"
-//************ÑÓÊ±º¯Êý************
-void  delay(uint  i)        				//ÑÓÊ±º¯Êý
+//************å»¶æ—¶å‡½æ•°************
+void  delay(uint  i)        				//å»¶æ—¶å‡½æ•°
 {
-	uint  j;
-	for  (j=0;j<i;j++){}
+	while(i--){;}
 }
 
-void delayus(uint i ) 
+void delayus(uchar i ) 
 { 	  		
 	while(i--){	     
 	    _nop_();	 
@@ -16,16 +15,33 @@ void delayus(uint i )
 
 void delayms(uint i)
 {
-  	TMOD =((TMOD&0x0F)|0x01);//¶¨Ê±Æ÷0£¬16Î»¶¨Ê±
+  	TMOD =((TMOD&0xF0)|0x01);//å®šæ—¶å™¨0ï¼Œ16ä½å®šæ—¶
   	TH0 = (65536 - msCount)/256;
   	TL0 = (65536 - msCount)%256;
-  	TR0 = 1;	    //Æô¶¯¶¨Ê±Æ÷0
+//	TF0 = 0;
+  	TR0 = 1;	    //å¯åŠ¨å®šæ—¶å™¨0
   	while(i--){
-  		while(TF0==0){     //1ms¶¨Ê±	  	 
-			TH0 = (65536 - msCount)/256;
-  			TL0 = (65536 - msCount)%256;
-			TF0=1;
-  		}
+  		while(TF0==0);//ç­‰å¾…1msæ—¶é—´åˆ°æ—¶
+		TL0 = (65536 - msCount)%256;					
+		TH0 = (65536 - msCount)/256;  			
+		TF0=0;
+		
   	}
- 	TR0 = 0; //Í£Ö¹¶¨Ê±Æ÷0
+ 	TR0 = 0; //åœæ­¢å®šæ—¶å™¨0
 }
+////test
+//sbit b = P3^0;
+//void main()
+//{	
+//	b =0;
+//	delayms(1);
+//	b =1;
+//	delayms(2);
+//	b=0;
+//	delayms(5);
+//	b=1;
+//	delayms(10);
+//	b=0;
+//	delayms(20);
+//	b=1;
+//}

@@ -48,7 +48,7 @@ unsigned char  I2C_CheckACK(void)
 {	
 	unsigned char ret = 0;
 	SCL = 0;
-	SDA = 1;//╔ш╓├SDA╬к╩ф╚ы
+	SDA = 1;//шо╛ч╜ох╝ХшДЪф╕║ш╛УхЕецибх╝П
 	SCL = 1;
 	_nop_();
 
@@ -90,7 +90,7 @@ unsigned char I2C_ReadByte(void)
 	{
 		
 		SCL = 0;
-		SDA = 1;//╔ш╓├SDA╬к╩ф╚ы╧▀
+		SDA = 1;//шо╛ч╜ох╝ХшДЪф╕║ш╛УхЕецибх╝П
 		_nop_();				
 		SCL = 1;
 		_nop_();

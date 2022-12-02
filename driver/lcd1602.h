@@ -12,6 +12,7 @@
 	
 	//初始化函数
 	void lcd1602Init(void);
+	void lcd1602Clean(void);
 
 	void lcd1602WriteChar(unsigned char row,
 					  unsigned char col,
